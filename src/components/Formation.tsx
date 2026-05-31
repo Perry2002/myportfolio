@@ -26,6 +26,29 @@ const FORMATIONS = [
     index: 3,
   },
 ];
+const CERTIFICATIONS = [
+  {
+    title: 'Computer Hardware Basics',
+    issuer: 'CISCO Networking Académie',
+    date: 'Mars 2024',
+    icon: '🖥️',
+    badge: '/badges/computer-hardware-basics.png',
+  },
+  {
+    title: 'Introduction to Cybersecurity',
+    issuer: 'CISCO Networking Académie',
+    date: 'Avril 2025',
+    icon: '🔐',
+    badge: '/badges/1000576944 (600×600).png',
+  },
+  {
+    title: 'Understanding and Visualizing Data with Python',
+    issuer: 'University of Michigan',
+    date: 'Février 2026',
+    icon: '🐍',
+    badge: '/badges/150226.png',
+  },
+];
 
 export default function Formation() {
   return (
@@ -113,6 +136,66 @@ export default function Formation() {
                 </div>
               </motion.div>
             ))}
+            {/* Certifications */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-80px' }}
+  transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+  className="mt-20 md:mt-28"
+>
+  {/* Header certifications */}
+  <div className="flex items-center gap-3 mb-8">
+    <span className="w-8 h-px bg-stroke" />
+    <span className="text-xs text-muted uppercase tracking-[0.3em]">Certifications</span>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {CERTIFICATIONS.map((cert, i) => (
+      <motion.div
+        key={cert.title}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
+        className="group bg-surface/40 backdrop-blur-sm border border-stroke rounded-2xl p-6 hover:border-[#89AACC]/30 transition-all duration-500"
+      >
+        {/* Icon */}
+        {/* Icon ou Badge */}
+{cert.badge ? (
+  <div className="w-16 h-16 mb-4 rounded-xl overflow-hidden border border-stroke">
+    <img
+      src={cert.badge}
+      alt={`Badge ${cert.title}`}
+      className="w-full h-full object-contain"
+    />
+  </div>
+) : (
+  <span className="text-2xl mb-4 block">{cert.icon}</span>
+)}
+
+        {/* Date badge */}
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#89AACC]/10 border border-[#89AACC]/20 text-xs text-[#89AACC] mb-3 font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#89AACC]" />
+          {cert.date}
+        </div>
+
+        {/* Title */}
+        <h4 className="text-sm md:text-base font-medium text-text-primary mb-2 leading-snug">
+          {cert.title}
+        </h4>
+
+        {/* Issuer */}
+        <p className="text-xs text-muted flex items-center gap-1.5">
+          <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.745 3.745 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.745 3.745 0 0 1 3.296-1.043A3.745 3.745 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.745 3.745 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12z" />
+          </svg>
+          {cert.issuer}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
           </div>
         </div>
       </div>

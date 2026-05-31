@@ -1,1 +1,9 @@
 /* App-level styles are handled via Tailwind utility classes */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+* {
+  min-width: 0;
+}

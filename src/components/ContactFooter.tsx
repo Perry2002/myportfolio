@@ -107,7 +107,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             {Array.from({ length: 10 }).map((_, i) => (
               <span
                 key={i}
-                className="text-[clamp(4rem,12vw,8rem)] font-display italic text-text-primary/10 leading-none mx-4"
+                className="text-[clamp(3rem,10vw,8rem)] font-display italic text-text-primary/10 leading-none mx-4"
               >
                 CONTACT • CONTACT •{' '}
               </span>

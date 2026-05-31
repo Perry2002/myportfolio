@@ -300,7 +300,7 @@ export default function SelectedWorks() {
     <>
       <PreviewModal project={activeProject} onClose={() => setActiveProject(null)} />
 
-      <div ref={wrapperRef} className="relative">
+      <div ref={wrapperRef} className="relative overflow-x-hidden">
         <section ref={sectionRef} id="work" className="bg-bg h-screen flex flex-col justify-center overflow-hidden">
 
           <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 w-full">

@@ -82,7 +82,7 @@ export default function Hero() {
   </div>
 
   {/* Name — agrandi */}
-  <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display italic leading-[0.9] tracking-tight text-text-primary text-left">
+  <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-display italic leading-[0.9] tracking-tight text-text-primary text-left">
     Perry DOYIGBE
   </h1>
 </div>
