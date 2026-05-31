@@ -11,6 +11,7 @@ import Skills from './components/Skills';
 // import Stats from './components/Stats';
 import GitHubRepos from './components/GitHubRepos';
 import ContactFooter from './components/ContactFooter';
+import { Analytics } from "@vercel/analytics/react";
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -65,6 +66,7 @@ function AppContent() {
 
   return (
     <>
+    <Analytics />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
 
       <ScrollProgressBar />
