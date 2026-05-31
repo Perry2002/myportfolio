@@ -227,7 +227,7 @@ export default function SelectedWorks() {
   if (e.deltaX === 0) return;
 
   e.preventDefault();
-  window.scrollBy({ top: e.deltaX * 2, behavior: 'instant' });
+  window.scrollBy({ top: e.deltaX * 5, behavior: 'instant' });
 };
 
     window.addEventListener('wheel', handleHorizontalWheel, { passive: false });
