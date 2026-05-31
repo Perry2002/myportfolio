@@ -101,19 +101,6 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       {/* Content */}
       <div className="relative z-10">
-        {/* Marquee */}
-        <div className="overflow-hidden mb-16 md:mb-20">
-          <div ref={marqueeRef} className="flex whitespace-nowrap">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <span
-                key={i}
-                className="text-[clamp(3rem,10vw,8rem)] font-display italic text-text-primary/10 leading-none mx-4"
-              >
-                CONTACT • CONTACT •{' '}
-              </span>
-            ))}
-          </div>
-        </div>
 
         {/* CTA + Form */}
         <motion.div
