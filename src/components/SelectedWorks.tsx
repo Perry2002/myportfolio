@@ -229,7 +229,7 @@ export default function SelectedWorks() {
       if (e.deltaX === 0) return;
 
       e.preventDefault();
-      const newScroll = trigger.scroll() + e.deltaX * 20;
+      const newScroll = trigger.scroll() + e.deltaX * 100;
       trigger.scroll(Math.max(trigger.start, Math.min(trigger.end, newScroll)));
     };
 
