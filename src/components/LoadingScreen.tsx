@@ -14,7 +14,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    const DURATION = 2700; // ms
+    const DURATION = 1500; // ms
 
     function tick(timestamp: number) {
       if (startRef.current === null) startRef.current = timestamp;
@@ -44,7 +44,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="text-xs text-muted uppercase tracking-[0.3em]"
       >
-        Portfolio
+        Perry DOYIGBE Portfolio
       </motion.div>
 
       {/* Center: rotating words */}
