@@ -1,18 +1,16 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { Observer } from 'gsap/Observer';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createPortal } from 'react-dom';
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(Observer);
 
 const PROJECTS = [
   {
     title: 'Orchid Island',
     image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto/f_auto/v1780217368/Capture_d_%C3%A9cran_2026-05-31_094829_alz4t4.png',
     url: 'https://www.orchidisland.immo/',
-    tags: ['React', 'TypeScript','Tailwind CSS', 'Express', 'MongoDB', ],
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Express', 'MongoDB'],
     index: '01',
   },
   {
@@ -84,7 +82,6 @@ function PreviewModal({ project, onClose }: { project: typeof PROJECTS[0] | null
             style={{ position: 'fixed', inset: '2rem', zIndex: 9999, display: 'flex', flexDirection: 'column', borderRadius: '1rem', overflow: 'hidden' }}
             className="border border-stroke bg-bg shadow-2xl"
           >
-            {/* Header */}
             <div className="flex items-center justify-between px-5 py-3 border-b border-stroke bg-surface/80 backdrop-blur-sm shrink-0">
               <div className="flex items-center gap-2">
                 <button onClick={onClose} className="w-3.5 h-3.5 rounded-full bg-red-500 hover:bg-red-400 transition-colors" aria-label="Fermer" />
@@ -108,8 +105,6 @@ function PreviewModal({ project, onClose }: { project: typeof PROJECTS[0] | null
                 </button>
               </div>
             </div>
-
-            {/* iFrame */}
             <div className="relative flex-1 bg-black">
               {!loaded && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-bg">
@@ -138,15 +133,15 @@ function PreviewModal({ project, onClose }: { project: typeof PROJECTS[0] | null
     </AnimatePresence>
   );
 
-  // ✅ Portal — rendu directement dans document.body, hors de la portée de GSAP
   return createPortal(modal, document.body);
 }
 
 // ── Card ──────────────────────────────────────────────────────────────────────
-function ProjectCard({ project }: { project: typeof PROJECTS[0]; onPreview: () => void }) {
+// ✅ onPreview correctement typé et utilisé
+function ProjectCard({ project, onPreview }: { project: typeof PROJECTS[0]; onPreview: () => void }) {
   return (
     <div
-      className="group relative shrink-0 rounded-2xl overflow-hidden bg-surface border border-stroke cursor-pointer select-none"
+      className="group relative shrink-0 rounded-2xl overflow-hidden bg-surface border border-stroke select-none"
       style={{ width: '380px', aspectRatio: '4/3' }}
     >
       <img
@@ -160,32 +155,33 @@ function ProjectCard({ project }: { project: typeof PROJECTS[0]; onPreview: () =
         {project.index}
       </span>
 
-      <div className="absolute bottom-0 left-0 right-0 p-5 group-hover:-translate-y-1 transition-transform duration-300 pointer-events-none">
-        <h3 className="text-lg font-display italic text-white mb-1 leading-tight">{project.title}</h3>
+      <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none group-hover:-translate-y-1 transition-transform duration-300">
+        <h3 className="text-lg font-display italic text-white mb-2 leading-tight">{project.title}</h3>
+        <div className="flex flex-wrap gap-1.5 overflow-hidden max-h-0 group-hover:max-h-20 transition-all duration-500">
           {project.tags.map((tag) => (
             <span key={tag} className="px-2 py-0.5 rounded-full text-[10px] bg-white/10 border border-white/20 text-white/70 backdrop-blur-sm">
               {tag}
             </span>
-          ))}      
+          ))}
+        </div>
       </div>
 
-      {/* Overlay hover */}
       <div className="absolute inset-0 bg-bg/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] pointer-events-none" />
 
-      {/* Bouton — z-index élevé, pointer-events explicite */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-  <button
-    data-preview={project.title}
-    className="flex items-center gap-2.5 px-6 py-3 rounded-full bg-text-primary text-bg text-sm font-medium shadow-lg hover:bg-[#89AACC] hover:text-white transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
-    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 20 }}
-  >
-    <svg className="w-4 h-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <circle cx="11" cy="11" r="8" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35" />
-    </svg>
-    Aperçu
-  </button>
-</div>
+      {/* ✅ Bouton avec onPreview directement */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ zIndex: 20 }}>
+        <button
+          onClick={(e) => { e.stopPropagation(); onPreview(); }}
+          className="flex items-center gap-2.5 px-6 py-3 rounded-full bg-text-primary text-bg text-sm font-medium shadow-lg hover:bg-[#89AACC] hover:text-white transition-all duration-200 hover:scale-105 active:scale-95"
+          style={{ pointerEvents: 'auto', zIndex: 20 }}
+        >
+          <svg className="w-4 h-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <circle cx="11" cy="11" r="8" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35" />
+          </svg>
+          Aperçu
+        </button>
+      </div>
     </div>
   );
 }
@@ -203,7 +199,6 @@ export default function SelectedWorks() {
     const wrapper = wrapperRef.current;
     if (!track || !wrapper) return;
 
-    // Distance totale à parcourir horizontalement
     const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
 
     const ctx = gsap.context(() => {
@@ -214,8 +209,8 @@ export default function SelectedWorks() {
           trigger: wrapper,
           start: 'top top',
           end: () => `+=${track.scrollWidth - window.innerWidth}`,
-          scrub: 1.5,          // lié au scroll — plus fluide
-          pin: true,         // épingle la section pendant le scroll
+          scrub: 1.5,
+          pin: true,
           anticipatePin: 0,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
@@ -225,16 +220,80 @@ export default function SelectedWorks() {
         },
       });
     });
+    // ✅ Scroll horizontal (trackpad 2 doigts) → avance le carrousel
+    const handleHorizontalWheel = (e: WheelEvent) => {
+     const trigger = ScrollTrigger.getAll()[0];
+      if (!trigger || !trigger.isActive) return;
 
-    return () => ctx.revert();
+      // Seulement si deltaX existe (trackpad horizontal)
+      if (e.deltaX === 0) return;
+
+      e.preventDefault();
+      const newScroll = trigger.scroll() + e.deltaX * 20;
+      trigger.scroll(Math.max(trigger.start, Math.min(trigger.end, newScroll)));
+    };
+
+    window.addEventListener('wheel', handleHorizontalWheel, { passive: false });
+
+    // ✅ Scroll horizontal trackpad (deltaX)
+    const handleWheel = (e: WheelEvent) => {
+      const trigger = ScrollTrigger.getAll()[0];
+      if (!trigger) return;
+
+      // Vérifier si la section est épinglée (active)
+      const isPinned = trigger.isActive;
+      if (!isPinned) return;
+
+      // Si scroll horizontal dominant (trackpad)
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.5) {
+        e.preventDefault();
+        const newScroll = trigger.scroll() + e.deltaX;
+        trigger.scroll(Math.max(trigger.start, Math.min(trigger.end, newScroll)));
+      }
+    };
+
+    // ✅ Touch mobile
+    const handleTouchStart = (e: TouchEvent) => {
+      (track as any)._touchStartX = e.touches[0].pageX;
+      (track as any)._touchStartY = e.touches[0].pageY;
+      (track as any)._scrollStart = gsap.getProperty(track, 'x') as number;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const deltaX = e.touches[0].pageX - (track as any)._touchStartX;
+      const deltaY = e.touches[0].pageY - (track as any)._touchStartY;
+
+      // Seulement si swipe horizontal dominant
+      if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+      const trigger = ScrollTrigger.getAll()[0];
+      if (!trigger) return;
+
+      const maxX = -(track.scrollWidth - window.innerWidth);
+      const newX = Math.max(maxX, Math.min(0, (track as any)._scrollStart + deltaX));
+      gsap.set(track, { x: newX });
+      trigger.scroll(
+        trigger.start + (-newX / (track.scrollWidth - window.innerWidth)) *
+        (trigger.end - trigger.start)
+      );
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    track.addEventListener('touchstart', handleTouchStart, { passive: true });
+    track.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener('wheel', handleHorizontalWheel);
+      track.removeEventListener('touchstart', handleTouchStart);
+      track.removeEventListener('touchmove', handleTouchMove);
+    };
   }, []);
 
   const scrollTo = (index: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const progress = index / (PROJECTS.length - 1);
     const trigger = ScrollTrigger.getAll()[0];
     if (!trigger) return;
+    const progress = index / (PROJECTS.length - 1);
     const targetScroll = trigger.start + progress * (trigger.end - trigger.start);
     gsap.to(window, { scrollTo: targetScroll, duration: 0.8, ease: 'power2.out' });
     setActiveIndex(index);
@@ -244,11 +303,9 @@ export default function SelectedWorks() {
     <>
       <PreviewModal project={activeProject} onClose={() => setActiveProject(null)} />
 
-      {/* Wrapper — ScrollTrigger s'accroche ici */}
       <div ref={wrapperRef} className="relative">
         <section ref={sectionRef} id="work" className="bg-bg h-screen flex flex-col justify-center overflow-hidden">
 
-          {/* Header */}
           <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -280,21 +337,44 @@ export default function SelectedWorks() {
             </motion.div>
           </div>
 
-          {/* Track horizontal — translateX par GSAP */}
+          {/* ✅ Track avec drag souris */}
           <div
-  ref={trackRef}
-  className="flex gap-6 px-6 md:px-10 lg:px-16 will-change-transform"
-  style={{ width: 'max-content', pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
-  onClick={(e) => {
-    // Remonter jusqu'au bouton cliqué
-    const btn = (e.target as HTMLElement).closest('[data-preview]');
-    if (btn) {
-      const title = btn.getAttribute('data-preview');
-      const found = PROJECTS.find(p => p.title === title);
-      if (found) setActiveProject(found);
-    }
-  }}
->
+            ref={trackRef}
+            className="flex gap-6 px-6 md:px-10 lg:px-16 will-change-transform"
+            style={{ width: 'max-content', cursor: 'grab' }}
+            onMouseDown={(e) => {
+              const track = trackRef.current;
+              if (!track) return;
+              // Ne pas déclencher si clic sur le bouton
+              if ((e.target as HTMLElement).closest('button')) return;
+
+              const startX = e.pageX;
+              const startX_gsap = gsap.getProperty(track, 'x') as number;
+              track.style.cursor = 'grabbing';
+
+              const onMove = (ev: MouseEvent) => {
+                const delta = ev.pageX - startX;
+                const maxX = -(track.scrollWidth - window.innerWidth);
+                const newX = Math.max(maxX, Math.min(0, startX_gsap + delta));
+                const trigger = ScrollTrigger.getAll()[0];
+                if (!trigger) return;
+                gsap.set(track, { x: newX });
+                trigger.scroll(
+                  trigger.start + (-newX / (track.scrollWidth - window.innerWidth)) *
+                  (trigger.end - trigger.start)
+                );
+              };
+
+              const onUp = () => {
+                track.style.cursor = 'grab';
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+              };
+
+              document.addEventListener('mousemove', onMove);
+              document.addEventListener('mouseup', onUp);
+            }}
+          >
             {PROJECTS.map((project) => (
               <ProjectCard
                 key={project.title}
