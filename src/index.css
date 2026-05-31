@@ -1,0 +1,110 @@
+/* ─── Google Fonts (must precede all other rules) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties (HSL) ─── */
+:root {
+  /* Dark theme (default) */
+  --bg: 0 0% 4%;
+  --surface: 0 0% 8%;
+  --text: 0 0% 96%;
+  --muted: 0 0% 53%;
+  --stroke: 0 0% 12%;
+  --accent: 0 0% 96%;
+  --accent-color: 205 34% 60%;
+  --bg-gradient: transparent;
+  --surface-hover: 0 0% 12%;
+}
+
+:root.light {
+  --bg: 0 0% 98%;
+  --surface: 0 0% 94%;
+  --text: 0 0% 8%;
+  --muted: 0 0% 45%;
+  --stroke: 0 0% 85%;
+  --accent: 0 0% 8%;
+  --accent-color: 205 34% 50%;
+  --bg-gradient: radial-gradient(ellipse at 50% 0%, rgba(137,170,204,0.08) 0%, transparent 60%);
+  --surface-hover: 0 0% 88%;
+}
+
+/* ─── Tailwind v4 Theme ─── */
+@theme {
+  --font-body: 'Inter', sans-serif;
+  --font-display: 'Instrument Serif', serif;
+
+  --color-bg: hsl(var(--bg));
+  --color-surface: hsl(var(--surface));
+  --color-text-primary: hsl(var(--text));
+  --color-muted: hsl(var(--muted));
+  --color-stroke: hsl(var(--stroke));
+}
+
+/* ─── Base Styles ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ─── Accent Gradient ─── */
+.accent-gradient {
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+}
+
+/* ─── Keyframes ─── */
+@keyframes scroll-down {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  50%  { opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+.animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+@keyframes role-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-role-fade-in {
+  animation: role-fade-in 0.4s ease-out;
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* ─── Halftone Pattern ─── */
+.halftone {
+  background-image: radial-gradient(circle, #000 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* ─── Light-mode override for halftone ─── */
+.light .halftone {
+  background-image: radial-gradient(circle, #ccc 1px, transparent 1px);
+}
+
+/* ─── Smooth transitions for theme-aware elements ─── */
+.theme-transition {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
