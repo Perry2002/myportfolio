@@ -209,7 +209,7 @@ export default function SelectedWorks() {
           trigger: wrapper,
           start: 'top top',
           end: () => `+=${track.scrollWidth - window.innerWidth}`,
-          scrub: 1.5,
+          scrub: true,
           pin: true,
           anticipatePin: 0,
           invalidateOnRefresh: true,
@@ -222,16 +222,13 @@ export default function SelectedWorks() {
     });
     // ✅ Scroll horizontal (trackpad 2 doigts) → avance le carrousel
     const handleHorizontalWheel = (e: WheelEvent) => {
-     const trigger = ScrollTrigger.getAll()[0];
-      if (!trigger || !trigger.isActive) return;
+  const trigger = ScrollTrigger.getAll()[0];
+  if (!trigger || !trigger.isActive) return;
+  if (e.deltaX === 0) return;
 
-      // Seulement si deltaX existe (trackpad horizontal)
-      if (e.deltaX === 0) return;
-
-      e.preventDefault();
-      const newScroll = trigger.scroll() + e.deltaX * 100;
-      trigger.scroll(Math.max(trigger.start, Math.min(trigger.end, newScroll)));
-    };
+  e.preventDefault();
+  window.scrollBy({ top: e.deltaX * 2, behavior: 'instant' });
+};
 
     window.addEventListener('wheel', handleHorizontalWheel, { passive: false });
 
