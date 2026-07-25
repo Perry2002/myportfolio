@@ -58,7 +58,7 @@ export default function Navbar({ scrollY, activeSection, onNavClick }: NavbarPro
         <span className="w-px h-5 bg-stroke mx-1" />
 
         {/* Theme toggle */}
-        {/* <ThemeToggle /> */}
+        {/* <ThemeToggle />  */}
 
         {/* Small spacer */}
         <span className="w-px h-5 bg-stroke mx-1" />

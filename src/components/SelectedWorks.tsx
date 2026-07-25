@@ -7,39 +7,46 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
   {
+    title: 'Comptoir Darna',
+    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/f_auto,q_auto/v1784979474/Comptoir_Darna_Restaurant_Spectacle_Marrakech_2026-07-25T11-31-26_ovqjbv.png',
+    url: 'https://comptoir-darna.vercel.app/',
+    tags: ['React', 'TypeScript', 'Tailwind CSS'],
+    index: '01',
+  },
+  {
     title: 'Orchid Island',
-    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto/f_auto/v1780217368/Capture_d_%C3%A9cran_2026-05-31_094829_alz4t4.png',
+    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto,f_auto/v1780217368/Capture_d_%C3%A9cran_2026-05-31_094829_alz4t4.png',
     url: 'https://www.orchidisland.immo/',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Express', 'MongoDB'],
-    index: '01',
+    index: '02',
   },
   {
     title: 'Sihati Fi Dar',
     image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto/f_auto/v1780094109/Capture_d_%C3%A9cran_2026-05-29_141010_gy8940.png',
     url: '#',
     tags: ['React', 'TypeScript', 'Laravel', 'MySQL', 'Tailwind CSS'],
-    index: '02',
-  },
-  {
-    title: 'ParaCado',
-    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto/f_auto/v1780094110/Capture_d_%C3%A9cran_2026-05-29_141207_o82bzw.png',
-    url: 'https://paracado.com/',
-    tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
     index: '03',
   },
   {
-    title: 'YOULIDA',
-    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto/f_auto/v1780094111/Capture_d_%C3%A9cran_2026-05-29_195131_vcktw9.png',
-    url: 'https://youlida.vercel.app/',
+    title: 'ParaCado',
+    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto,f_auto/v1780094110/Capture_d_%C3%A9cran_2026-05-29_141207_o82bzw.png',
+    url: 'https://paracado.com/',
     tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
     index: '04',
   },
   {
-    title: 'Planet Technologies',
-    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto/f_auto/v1780094110/Capture_d_%C3%A9cran_2026-05-29_193009_xqdtoo.png',
-    url: 'https://planet-technologies-v1yb.vercel.app/',
+    title: 'YOULIDA',
+    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto,f_auto/v1780094111/Capture_d_%C3%A9cran_2026-05-29_195131_vcktw9.png',
+    url: 'https://youlida.vercel.app/',
     tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
     index: '05',
+  },
+  {
+    title: 'Planet Technologies',
+    image: 'https://res.cloudinary.com/djvqjz65z/image/upload/q_auto,f_auto/v1780094110/Capture_d_%C3%A9cran_2026-05-29_193009_xqdtoo.png',
+    url: 'https://planet-technologies-v1yb.vercel.app/',
+    tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
+    index: '06',
   },
 ];
 
